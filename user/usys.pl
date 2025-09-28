@@ -46,3 +46,4 @@ entry("uptime");
 entry("set_priority");
 entry("get_priority");
 entry("cps");
+entry("nice");

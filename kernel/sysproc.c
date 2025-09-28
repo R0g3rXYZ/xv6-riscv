@@ -170,3 +170,12 @@ sys_cps(void)
 {
 	return cps();
 }
+
+uint64
+sys_nice(void)
+{
+	int pid, prio;
+	argint(0, &pid);
+	argint(1, &prio);
+	return setnice(pid, prio);
+}

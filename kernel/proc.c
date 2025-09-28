@@ -706,3 +706,21 @@ cps(void)
   }
   return 22;
 }
+
+int
+setnice(int pid, int prio)
+{
+	if(prio < 0) prio = 0;
+	if(prio > 39) prio = 39;
+
+
+	struct proc *p;
+	for (p=proc; p < &proc[NPROC]; p++){
+		if(p->pid == pid) {
+			p->nice = prio;
+			return 0;
+			}
+		}
+		return -1;
+}
+
