@@ -55,6 +55,7 @@ procinit(void)
       initlock(&p->lock, "proc");
       p->state = UNUSED;
       p->kstack = KSTACK((int) (p - proc));
+      p->trace_mask = 0;
   }
 }
 
@@ -131,7 +132,7 @@ found:
     release(&p->lock);
     return 0;
   }
-
+  p->nice = 20;
   // An empty user page table.
   p->pagetable = proc_pagetable(p);
   if(p->pagetable == 0){
@@ -286,8 +287,9 @@ kfork(void)
   np->cwd = idup(p->cwd);
 
   safestrcpy(np->name, p->name, sizeof(p->name));
-
+  np->nice = 20;
   pid = np->pid;
+  np->trace_mask = p->trace_mask;
 
   release(&np->lock);
 

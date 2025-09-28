@@ -1,0 +1,21 @@
+Q1: Which function is called by syscall?
+The syscall is called by init.
+
+Q2: What is the value of p->trapfame->a7 and what does that value represent?
+The value of p->trapframe->a7 is 15, this represents the syscall id of the caller.
+
+Q3: What is the previous mode the CPU was in?
+The CPU was last in user mode according to an SPP value of 0.
+
+Q4: The kernel is panicing at this line:  
+num = *(int*)0;
+    80002842:   00002683                lw      a3,0(zero) # 0 <_entry-0x80000000>  
+Meaning the register a3 corresponds to the variable num.
+
+Q5: Why does the kernel crash?
+The address 0 is intentionally unmapped so that it can be checked against for errors, meaning the CPU takes a page-fault trap when it tries to load it.
+
+q6: What is the name and pid of the process that was running when the kernel paniced?
+The name is init and the pid is 1.
+
+

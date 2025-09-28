@@ -105,3 +105,63 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+
+uint64
+sys_trace(void)
+{
+  int mask;
+  argint(0, &mask);
+  //  return -1;
+  myproc()->trace_mask = (uint64) mask;
+  return 0;
+}
+
+uint64
+sys_set_priority(void)
+{
+  int pid, prio;
+  argint(0, &pid);
+  argint(1, &prio);
+
+  if (pid <= 0)
+    return -1;
+  if (prio < 0)  prio = 0;
+  if (prio > 39) prio = 39;
+
+  struct proc *p;
+
+  for (p = proc; p < &proc[NPROC]; p++) {
+    acquire(&p->lock);
+    if (p->pid == pid) {
+      p->nice = prio;
+      release(&p->lock);
+      return 0;
+    }
+    release(&p->lock);
+  }
+  return -1;
+}
+
+uint64
+sys_get_priority(void)
+{
+  int pid;
+  argint(0, &pid);
+
+  if (pid <= 0)
+    return -1;
+
+  struct proc *p;
+  for (p = proc; p < &proc[NPROC]; p++) {
+    acquire(&p->lock);
+    if (p->pid == pid) {
+      int v = p->nice;
+      release(&p->lock);
+      return v;
+    }
+    release(&p->lock);
+  }
+  return -1;
+}
+

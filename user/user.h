@@ -1,4 +1,8 @@
 #define SBRK_ERROR ((char *)-1)
+//#include "types.h" // added to fix compile error
+typedef unsigned int  uint;
+typedef unsigned short ushort;
+typedef unsigned char  uchar;
 
 struct stat;
 
@@ -11,6 +15,7 @@ int write(int, const void*, int);
 int read(int, void*, int);
 int close(int);
 int kill(int);
+int trace(int);
 int exec(const char*, char**);
 int open(const char*, int);
 int mknod(const char*, short, short);
@@ -24,6 +29,9 @@ int getpid(void);
 char* sys_sbrk(int,int);
 int pause(int);
 int uptime(void);
+int set_priority(int pid, int priority);
+int get_priority(int pid);
+
 
 // ulib.c
 int stat(const char*, struct stat*);

@@ -1,0 +1,35 @@
+ESTIMATE: 5 Hours
+
+Date   Start    End    Lab Part    Work
+------------------------------------------
+9/13    11:00    17:00   1           Read assignment, complete part 1
+9/14    12:00    17:30   2           Complete part 2
+9/16    8:00     11:00   3           Complete part 3
+
+Excersice 2:
+- Add the trace functionality to syscall files
+- Add to SYS_ and argint, alongwith other corresponding function indexing tables
+- Add the actual file and make sure it works properly
+- Fix inheritance by editing kfork()
+
+Exercise 3:
+- Add the new syscalls and prototypes to respective files
+- Edit proc.h, kfork(), and allocproc() to have a default nice value
+- Write the actual functions and tests, and add them to the u_progs and other registry type things
+- Make sure the test actually floors, had a lot of issue getting this to work for some reason
+
+Total File List:
+Makefile
+user/user.h
+user/usys.pl
+kernel/syscall.h
+kernel/syscall.c
+kernel/sysproc.c
+kernel/proc.h
+kernel/proc.c
+user/trace.c
+user/lab2e3test.c
+
+
+
+TOTAL: ~14 Hours
