@@ -225,6 +225,7 @@ userinit(void)
   p = allocproc();
   initproc = p;
   
+  p->nice = 20;
   p->cwd = namei("/");
 
   p->state = RUNNABLE;
@@ -686,4 +687,22 @@ procdump(void)
     printf("%d %s %s", p->pid, state, p->name);
     printf("\n");
   }
+}
+
+
+int
+cps(void)
+{
+  struct proc *p;
+
+  printf("Name\tpid\tstate\t\tpriority\n");
+  for(p = proc; p < &proc[NPROC]; p++){
+    if(p->state == SLEEPING)
+      printf("%s\t%d\tSLEEPING\t%d\n", p->name, p->pid, p->nice);
+    else if(p->state == RUNNING)
+      printf("%s\t%d\tRUNNING\t\t%d\n",  p->name, p->pid, p->nice);
+    else if(p->state == RUNNABLE)
+      printf("%s\t%d\tRUNNABLE\t%d\n", p->name, p->pid, p->nice);
+  }
+  return 22;
 }

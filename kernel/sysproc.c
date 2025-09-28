@@ -165,3 +165,8 @@ sys_get_priority(void)
   return -1;
 }
 
+uint64
+sys_cps(void)
+{
+	return cps();
+}

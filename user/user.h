@@ -31,6 +31,7 @@ int pause(int);
 int uptime(void);
 int set_priority(int pid, int priority);
 int get_priority(int pid);
+int cps(void);
 
 
 // ulib.c
